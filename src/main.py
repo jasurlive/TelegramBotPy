@@ -17,7 +17,7 @@ kb=ReplyKeyboardMarkup([
 
 def log(update: Update):
     user=update.effective_user
-    logging.info(f"user_id={user.id} username={user.username} text={update.message.text}")
+    logging.info(f"user_id={user.id} username={user.name} text={update.message.text}")
 
 async def info(update, context):
     log(update)
@@ -38,7 +38,8 @@ async def reset(update, context):
 async def users(update, context):
     log(update)
     users=requests.get("https://jsonplaceholder.typicode.com/users").json()
-    await update.message.reply_text("\n".join(u["username"] for u in users))
+    out="\n".join(f"{u['name']}" for u in users)
+    await update.message.reply_text(out)
 
 async def numbers(update, context):
     log(update)
@@ -48,7 +49,7 @@ async def numbers(update, context):
 
 routes={
     "ℹ️ About Bot": info,
-    "👥 Who is online today?": users,
+    "👥 Who is on shift today?": users,
     "🛠️ Who handles what?": numbers,
     "♻️ Reset Bot": reset
 }
