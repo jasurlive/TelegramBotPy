@@ -7,9 +7,9 @@ simple telegram bot made in python using polling
 
 ## features
 
-* list users
+* list users (open source json data used from *https://jsonplaceholder.typicode.com/users*)
 * show any info
-* reset
+* reset the bot
 
 ## setup
 
@@ -30,16 +30,17 @@ pip install python-telegram-bot python-dotenv requests
 
 ```
 BOT_TOKEN=<your_telegram_token>
+ADMIN_ID=<your_telegram_id>
 ```
 
 ## run
 
 ```bash
-python main.py
+python src/main.py
 ```
 
 ## systemd
-use main.py as service on linux
+use src/main.py as service on linux
 
 sudo nano /etc/systemd/system/telegrambot.service (!)
 
@@ -54,6 +55,8 @@ ExecStart=/home/YOURUSERNAME/bot/.venv/bin/python main.py
 
 Restart=always
 Environment="BOT_TOKEN=your_token"
+Restart=always
+Environment="ADMIN_ID=your_id"
 
 [Install]
 WantedBy=multi-user.target
@@ -65,7 +68,7 @@ sudo systemctl enable telegrambot
 sudo systemctl start telegrambot
 ```
 
-you'll also need these commands if you make any changes to main.py
+you'll also need to run these commands if you make any changes to main.py
 
 ## license
 
